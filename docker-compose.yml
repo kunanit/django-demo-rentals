@@ -3,9 +3,10 @@ services:
   postgres:
     image: postgres
     environment:
+      # for local development only
       POSTGRES_PASSWORD: postgres
     volumes:
-      - /var/lib/postgresql/data/
+      - pgdata:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
   app:
@@ -15,3 +16,6 @@ services:
     ports:
       - "8000:8000"
     command: python manage.py runserver 0.0.0.0:8000
+
+volumes:
+  pgdata:
