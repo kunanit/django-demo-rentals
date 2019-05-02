@@ -7,6 +7,7 @@ from rest_framework.decorators import action
 from rest_framework.decorators import api_view, renderer_classes
 from .models import User, Vehicle, Trip
 from .serializers import UserSerializer, VehicleSerializer, TripSerializer
+from rest_framework.schemas import get_schema_view
 
 
 def test_view(request):
@@ -39,14 +40,9 @@ class VehicleViewSet(viewsets.ModelViewSet):
         vehicle = self.get_object()
         return Response({'trip_count':vehicle.trip_count()})
 
-
 class TripViewSet(viewsets.ModelViewSet):
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
 
 
-@api_view(['GET'])
-@renderer_classes([renderers.OpenAPIRenderer])
-def schema_view(request):
-    generator = schemas.SchemaGenerator(title='Rentals API')
-    return Response(generator.get_schema()) 
+schema_view = get_schema_view(title='My api schema')

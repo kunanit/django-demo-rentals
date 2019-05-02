@@ -10,12 +10,11 @@ router.register(r'users', views.UserViewSet)
 router.register(r'vehicles', views.VehicleViewSet)
 router.register(r'trips', views.TripViewSet)
 
-
 urlpatterns = [
     path('', include(router.urls)),
     path('test', views.test_view),
     path('test_api', views.test_api_view),
     path('test_template', views.test_template_view),
     path('schema', views.schema_view),
-    path('docs/', include_docs_urls(title='My API title')),
+    path('docs/', include_docs_urls(title='Rentals API')),
 ]
